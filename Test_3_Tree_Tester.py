@@ -14,7 +14,7 @@ class MyTestCase(unittest.TestCase):
         print("----------------------------------------")
         print("This is what Mr. Howe's looked like.")
         print("""
-                       [i]
+                [i]
             <
                     [u]
                 <
