@@ -151,10 +151,12 @@ class HuffmanEncoder:
         # ----------------------
         # TODO: You'll be writing this part! Insert your code here.
         for char in message_to_encode:
-            pass
+            try:
+                encoded_result.extend(self.encode_dictionary[char])
+            except KeyError:
+                raise KeyError(f"The letter \'{char}\' was not contained in the key string.")
 
-            # if there is a problem, you should throw the following.
-            # raise new KeyError(f"The letter \'{char}\' was not contained in the key string.")
+
 
         # ----------------------
 
@@ -171,7 +173,17 @@ class HuffmanEncoder:
         # ----------------------
         # TODO: You'll be writing this part! Insert your code here.
         # I suggest you make use of "if isinstance(p, JointNode):" and/or "if isinstance(p, LeafNode):"
-
+        for i in message_to_decode:
+            if isinstance(p, LeafNode):
+                decoded_result += p.value
+                p = self.encoding_tree
+            if isinstance(p, JointNode):
+                if i == 0:
+                    p = p.left
+                else:
+                    p = p.right
+        if isinstance(p, LeafNode):
+            decoded_result += p.value
         # ----------------------
 
         return decoded_result
