@@ -1,6 +1,6 @@
 import unittest
 from HuffmanEncoderFile import HuffmanEncoder
-
+from TreeNodesFile import TreeNode, JointNode, LeafNode
 
 class MyTestCase(unittest.TestCase):
 
@@ -9,6 +9,39 @@ class MyTestCase(unittest.TestCase):
         encoder.build_frequency_dictionary()
         encoder.build_priority_queue()
         encoder.build_tree()
+        expected_tree = JointNode( #19
+                                   JointNode( #10A
+                                             JointNode( #4A
+                                                        JointNode( #3A
+                                                                  LeafNode("i"), #2A
+                                                                  JointNode( #2B
+                                                                             LeafNode("u"), #1A
+                                                                             LeafNode("b") #1B
+                                                                           )
+                                                                 ),
+                                                        LeafNode("y") #3B
+                                                       ),
+                                               JointNode( #4B
+                                                          JointNode( #5A
+                                                                    LeafNode("o"), #6A
+                                                                    JointNode( #6B
+                                                                              LeafNode("M"), #7A
+                                                                              LeafNode(".") #7B
+                                                                              )
+                                                                   ),
+                                                          JointNode( #5B
+                                                                    JointNode( #8A
+                                                                               LeafNode("f"), #9A
+                                                                               LeafNode(",") # 9B
+                                                                              ),
+                                                                    LeafNode("h") #8B
+                                                                   )
+                                                        )
+                                                     )
+                                             ),
+                                    JointNode( #10B
+                                    )
+                                 )
         print("This is your tree:")
         encoder.encoding_tree.print_tree()
         print("----------------------------------------")
@@ -171,6 +204,19 @@ It was childish to feel disappointed, but childishness comes almost as naturally
             self.assertTrue(item in expected, "unexpected key in the encode_dictionary")
             self.assertEqual(expected[item], encoder.encode_dictionary[item], f"Value for {item} did not match.")
 
+def compareTrees(root1: TreeNode, root2: TreeNode) -> bool:
+    if root1 is None and root2 is None:
+        return True
+    if root1 is None:
+        print(f"Structure of trees does not match. Second tree has a node at {root2.value} that first tree does not.")
+        return False
+    if root2 is None:
+        print(f"Structure of trees does not match. First tree has a node at {root1.value} that second tree does not.")
+        return False
+    if root1.value != root2.value:
+        print(f"Mismatched values in trees. {root1.value} != {root2.value}.")
+        return False
+    return compareTrees(root1.left, root2.left) and compareTrees(root1.right, root2.right)
 
 if __name__ == '__main__':
     unittest.main()

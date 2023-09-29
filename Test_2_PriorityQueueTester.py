@@ -84,6 +84,5 @@ class MyTestCase(unittest.TestCase):
             self.assertEqual(expected[i][0], PQ.my_tree[i][0])
             self.assertEqual(expected[i][1], PQ.my_tree[i][1].value)
 
-
 if __name__ == '__main__':
     unittest.main()
