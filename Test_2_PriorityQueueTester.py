@@ -1,3 +1,4 @@
+import logging
 import unittest
 from HuffmanEncoderFile import HuffmanEncoder
 from PriorityQueueFile import PriorityQueue
@@ -61,16 +62,25 @@ class MyTestCase(unittest.TestCase):
 
         print(PQ)
 
-        expected = [[1, "C"], [1, "O"], [1, "U"], [4, "A"], [1, ";"], [1, "K"], [1, "Z"], [4, "x"], [4, ":"], [1, "7"],
-                    [1, "1"], [2, "Y"], [2, "R"], [1, "I"], [1, ")"], [56, "v"], [42, "k"], [8, "z"], [4, "j"],
-                    [22, "\n"], [7, "S"], [1, "L"], [21, "D"], [4, "P"], [4, "?"], [2, "q"], [10, "H"], [1, "("],
-                    [3, "\""], [1, "J"], [930, " "], [66, "p"], [263, "o"], [52, "f"], [208, "h"], [59, "b"],
-                    [84, "g"], [5, "W"], [320, "t"], [113, "d"], [207, "s"], [224, "n"], [46, ","], [57, "w"],
-                    [8, "B"], [433, "e"], [96, "c"], [99, "u"], [6, "*"], [220, "r"], [43, "."], [63, "y"], [6, "—"],
-                    [279, "a"], [17, "T"], [157, "l"], [3, "N"], [272, "i"], [13, "\'"], [58, "m"]]
+        expected = [(1, "C"), (1, "O"), (1, "U"), (4, "A"), (1, ";"), (1, "K"), (1, "Z"), (4, "x"), (4, ":"), (1, "7"),
+                    (1, "1"), (2, "Y"), (2, "R"), (1, "I"), (1, ")"), (56, "v"), (42, "k"), (8, "z"), (4, "j"),
+                    (22, "\n"), (7, "S"), (3, "G"), (1, "L"), (21, "D"), (4, "P"), (4, "?"), (2, "q"), (10, "H"),
+                    (1, "("), (3, "\""), (1, "J"), (930, " "), (66, "p"), (263, "o"), (52, "f"), (208, "h"), (59, "b"),
+                    (84, "g"), (5, "W"), (320, "t"), (113, "d"), (207, "s"), (8, "-"), (224, "n"), (46, ","), (57, "w"),
+                    (8, "B"), (433, "e"), (96, "c"), (99, "u"), (6, "*"), (220, "r"), (43, "."), (63, "y"), (6, "—"),
+                    (279, "a"), (17, "T"), (157, "l"), (3, "N"), (272, "i"), (13, "'"), (58, "m")]
 
+        expected_Q = PriorityQueue(tree=expected, is_min_heap=True)
         self.assertFalse(PQ.is_empty(), "The priority queue should not be empty.")
+
+        print("*" * 40)
+        logging.info("Expected Tree")
+        logging.info(expected_Q)
+        logging.info("Actual Tree")
+        logging.info(PQ)
+        print(PQ.my_tree)
         for i in range(len(PQ.my_tree)):
+
             self.assertEqual(expected[i][0], PQ.my_tree[i][0])
             self.assertEqual(expected[i][1], PQ.my_tree[i][1].value)
 
