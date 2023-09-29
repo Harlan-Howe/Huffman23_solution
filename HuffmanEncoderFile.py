@@ -26,10 +26,13 @@ class HuffmanEncoder:
         self.freq_dict: Dict[str, int] = {}
         for character in self.encode_string:
             # ----------------------------------------
-            # TODO: This is where you will write your code to either add a new item to the dictionary or to
+            # Done: This is where you will write your code to either add a new item to the dictionary or to
             #  increment the item that is already there. The key should be the character
             #  and the value is the frequency.
-            pass
+            if character in self.freq_dict:
+                self.freq_dict[character] += 1
+            else:
+                self.freq_dict[character] = 1
 
             # ----------------------------------------
 
@@ -41,10 +44,11 @@ class HuffmanEncoder:
         (That is, you'll need to make a new LeafNode[str] for each item in self.freq_dict and add it to the PQ.)
 
         """
-        self.frequency_queue: PriorityQueue[TreeNode[str]] = PriorityQueue[TreeNode[T]](isMinHeap=True)
+        self.frequency_queue: PriorityQueue[TreeNode[str]] = PriorityQueue[TreeNode[T]](is_min_heap=True)
         # ----------------------
-        # TODO: You'll be writing this part! Insert your code here.
-
+        # Done: You'll be writing this part! Insert your code here.
+        for key in self.freq_dict.keys():
+            self.frequency_queue.add_value(LeafNode(key), self.freq_dict[key])
         # ----------------------
 
     def build_tree(self):
@@ -65,6 +69,13 @@ class HuffmanEncoder:
         """
         # ----------------------
         # TODO: You'll be writing this part! Insert your code here.
+        while len(self.frequency_queue) > 1:
+            p1, n1 = self.frequency_queue.pop()
+            p2, n2 = self.frequency_queue.pop()
+            p_new = p1+p2
+            n_new = JointNode(n1, n2)
+            self.frequency_queue.add_value(n_new, p_new)
+
 
         # suggestion: each time through your loop, log the
         # priority queue to help you debug.
