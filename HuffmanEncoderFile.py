@@ -68,7 +68,7 @@ class HuffmanEncoder:
         Note: I've written the last step for you... so don't reinvent it.
         """
         # ----------------------
-        # TODO: You'll be writing this part! Insert your code here.
+        # Done: You'll be writing this part! Insert your code here.
         while len(self.frequency_queue) > 1:
             p1, n1 = self.frequency_queue.pop()
             p2, n2 = self.frequency_queue.pop()
